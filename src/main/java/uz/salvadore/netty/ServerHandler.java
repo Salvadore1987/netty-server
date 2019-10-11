@@ -19,7 +19,8 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if (msg instanceof FullHttpRequest) {
             final FullHttpRequest request = (FullHttpRequest) msg;
-            final String message = "{\"name\": \"Netty\"}";
+            final FullHttpResponse response = Router.routes(request);
+            /*final String message = "{\"name\": \"Netty\"}";
             FullHttpResponse response = new DefaultFullHttpResponse(
                     HttpVersion.HTTP_1_1,
                     HttpResponseStatus.OK, copiedBuffer(message.getBytes()));
@@ -30,7 +31,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 );
             }
             response.headers().set(HttpHeaderNames.CONTENT_TYPE, "application/json");
-            response.headers().set(HttpHeaderNames.CONTENT_LENGTH, message.length());
+            response.headers().set(HttpHeaderNames.CONTENT_LENGTH, message.length());*/
 
             ctx.writeAndFlush(response);
         } else {
