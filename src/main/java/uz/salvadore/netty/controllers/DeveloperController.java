@@ -13,7 +13,7 @@ import java.util.List;
 import static io.netty.buffer.Unpooled.copiedBuffer;
 
 @RestController
-@RequestMapping(value = "/developers")
+@RequestMapping(value = "developers")
 public class DeveloperController {
 
     private final DeveloperService service;
@@ -23,10 +23,11 @@ public class DeveloperController {
     }
 
     @RequestMapping(value = "findAll")
-    public FullHttpResponse findAll(final FullHttpRequest request) {
+    public FullHttpResponse findAll(FullHttpRequest request) {
         FullHttpResponse response;
         try {
             List<Developer> developers = service.findAll();
+            developers.stream().forEach(System.out::println);
             String message = new ObjectMapper().writeValueAsString(developers);
             response = new DefaultFullHttpResponse(
                     HttpVersion.HTTP_1_1,

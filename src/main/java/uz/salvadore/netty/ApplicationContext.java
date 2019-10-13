@@ -1,6 +1,7 @@
 package uz.salvadore.netty;
 
 import org.reflections.Reflections;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import uz.salvadore.netty.annotations.RestController;
 import java.util.ArrayList;
 import java.util.List;

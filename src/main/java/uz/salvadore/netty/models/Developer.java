@@ -1,17 +1,22 @@
 package uz.salvadore.netty.models;
 
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
+
 public class Developer {
-    private String id;
+
+    @BsonProperty("_id")
+    private ObjectId id;
     private String name;
     private String surname;
     private int age;
     private String position;
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

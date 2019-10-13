@@ -19,12 +19,13 @@ public class Router {
         //searchCtrlAndMethod(ctrlName, methodName);
 
         String className = getClassName(ctrlName);
-        Method m = getMethod(className, methodName);
-        m.invoke(Class.forName(className), (FullHttpRequest) request);
 
-        return new DefaultFullHttpResponse(
-                HttpVersion.HTTP_1_1,
-                HttpResponseStatus.BAD_REQUEST);
+        Class<?> clazz = Class.forName(className);
+        Method m = clazz.getDeclaredMethod(methodName, new Class[]{FullHttpRequest.class});
+        Object o = clazz.newInstance();
+        FullHttpResponse response = (FullHttpResponse) m.invoke(o, request);
+
+        return response;
     }
 
     private static Method getMethod(String className, String methodName) throws Exception {
